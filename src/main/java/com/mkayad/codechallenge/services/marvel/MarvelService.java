@@ -1,6 +1,6 @@
-package com.mkayad.yapilycodechallenge.services.marvel;
+package com.mkayad.codechallenge.services.marvel;
 
-import com.mkayad.yapilycodechallenge.domain.marvel.MarvelResponseWrapper;
+import com.mkayad.codechallenge.domain.marvel.MarvelResponseWrapper;
 import io.reactivex.Observable;
 import retrofit2.http.Path;
 import retrofit2.http.Query;

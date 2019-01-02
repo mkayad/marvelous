@@ -1,4 +1,4 @@
-package com.mkayad.yapilycodechallenge.domain;
+package com.mkayad.codechallenge.domain;
 
 
 import java.util.List;

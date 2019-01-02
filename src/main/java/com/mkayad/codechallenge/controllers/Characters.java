@@ -1,15 +1,15 @@
-package com.mkayad.yapilycodechallenge.controllers;
+package com.mkayad.codechallenge.controllers;
 
-import com.mkayad.yapilycodechallenge.Application;
-import com.mkayad.yapilycodechallenge.config.CacheConfiguration;
-import com.mkayad.yapilycodechallenge.domain.DataResponse;
-import com.mkayad.yapilycodechallenge.domain.marvel.Character;
-import com.mkayad.yapilycodechallenge.domain.marvel.MarvelResponseWrapper;
-import com.mkayad.yapilycodechallenge.domain.marvel.SimpleCharacter;
-import com.mkayad.yapilycodechallenge.domain.marvel.URL;
-import com.mkayad.yapilycodechallenge.services.google.GoogleTranslateService;
-import com.mkayad.yapilycodechallenge.services.marvel.MarvelService;
-import com.mkayad.yapilycodechallenge.services.ServiceGenerator;
+import com.mkayad.codechallenge.config.CacheConfiguration;
+import com.mkayad.codechallenge.domain.marvel.Character;
+import com.mkayad.codechallenge.domain.marvel.SimpleCharacter;
+import com.mkayad.codechallenge.Application;
+import com.mkayad.codechallenge.domain.DataResponse;
+import com.mkayad.codechallenge.domain.marvel.MarvelResponseWrapper;
+import com.mkayad.codechallenge.domain.marvel.URL;
+import com.mkayad.codechallenge.services.google.GoogleTranslateService;
+import com.mkayad.codechallenge.services.marvel.MarvelService;
+import com.mkayad.codechallenge.services.ServiceGenerator;
 import io.reactivex.Observable;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

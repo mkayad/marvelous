@@ -1,4 +1,4 @@
-package com.mkayad.yapilycodechallenge.config;
+package com.mkayad.codechallenge.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

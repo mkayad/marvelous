@@ -1,10 +1,8 @@
-package com.mkayad.yapilycodechallenge.domain.google;
+package com.mkayad.codechallenge.domain.google;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.util.List;
 
 @ToString
 @Getter

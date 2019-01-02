@@ -1,4 +1,4 @@
-package com.mkayad.yapilycodechallenge.domain.marvel;
+package com.mkayad.codechallenge.domain.marvel;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

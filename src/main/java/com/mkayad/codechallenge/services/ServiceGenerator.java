@@ -1,6 +1,6 @@
-package com.mkayad.yapilycodechallenge.services;
+package com.mkayad.codechallenge.services;
 
-import com.mkayad.yapilycodechallenge.services.marvel.MarvelService;
+import com.mkayad.codechallenge.services.marvel.MarvelService;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

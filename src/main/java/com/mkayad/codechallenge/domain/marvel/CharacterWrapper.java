@@ -1,6 +1,5 @@
-package com.mkayad.yapilycodechallenge.domain.marvel;
+package com.mkayad.codechallenge.domain.marvel;
 
-import com.mkayad.yapilycodechallenge.domain.marvel.Character;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

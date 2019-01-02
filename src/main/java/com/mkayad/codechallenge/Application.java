@@ -1,9 +1,9 @@
-package com.mkayad.yapilycodechallenge;
+package com.mkayad.codechallenge;
 
-import com.mkayad.yapilycodechallenge.config.CacheConfiguration;
-import com.mkayad.yapilycodechallenge.domain.marvel.MarvelResponseWrapper;
-import com.mkayad.yapilycodechallenge.services.marvel.MarvelService;
-import com.mkayad.yapilycodechallenge.services.ServiceGenerator;
+import com.mkayad.codechallenge.config.CacheConfiguration;
+import com.mkayad.codechallenge.domain.marvel.MarvelResponseWrapper;
+import com.mkayad.codechallenge.services.ServiceGenerator;
+import com.mkayad.codechallenge.services.marvel.MarvelService;
 import io.reactivex.Observable;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
