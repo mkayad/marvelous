@@ -13,8 +13,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-
 import java.time.LocalDateTime;
 
 
@@ -68,7 +66,7 @@ public class Application {
 
             if(googleAPIKey==null)
                 googleAPIKey=System.getProperty("gg-api-key");
-            
+
             int ts= LocalDateTime.now().getNano();
             Cache cache=cacheConfiguration.ehCacheCacheManager().getCacheManager().getCache("charactersCache");
             Observable<MarvelResponseWrapper> characters= ServiceGenerator.createService(MarvelService.class).getCharacters(ts, marvelPublicKey,getHash(ts),100);

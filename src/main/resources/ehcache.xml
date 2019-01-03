@@ -6,8 +6,5 @@
     <cache name="charactersCache"
            maxElementsInMemory="10000"
            eternal="true"
-
            overflowToDisk="true"/>
 </ehcache>
-        <!--timeToIdleSeconds="600"-->
-        <!--timeToLiveSeconds="3600"-->

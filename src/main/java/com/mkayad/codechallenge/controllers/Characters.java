@@ -33,9 +33,6 @@ import java.util.stream.Collectors;
 @RestController
 public class Characters {
 
-    @Value("${marvel.api.url}")
-    private String apiURL;
-
     /* Google recognized language codes*/
     private final String languages[]= {"af","am","ar","az","be","bg","bn","bs","ca","ceb","co","cs","cy","da","de","el",
             "en","eo","es","et","eu","fa","fi","fr","fy","ga","gd","gl","gu","ha","haw","hi","hmn","hr","ht","hu","hy",
@@ -80,19 +77,19 @@ public class Characters {
     public @ResponseBody DeferredResult<SimpleCharacter> getCharacterDetail(@PathVariable("characterId") int characterId) {
         DeferredResult<SimpleCharacter> characters=new DeferredResult<>();
         fetchCharacterDetail(characterId).subscribe(response-> {
-            if (response.getCode() == 200 && response.getData().getResults()!=null && response.getData().getResults().size()>0) {
-                Character character=response.getData().getResults().get(0);
-                SimpleCharacter simpleCharacter=new SimpleCharacter(character.getId(),character.getName(),character.getDescription(),character.getThumbnail());
-                characters.setResult(simpleCharacter);
-            }else {
-                characters.setErrorResult("Error, Character can't be found "+response.getStatus());
-            }
+                    if (response.getCode() == 200 && response.getData().getResults()!=null && response.getData().getResults().size()>0) {
+                        Character character=response.getData().getResults().get(0);
+                        SimpleCharacter simpleCharacter=new SimpleCharacter(character.getId(),character.getName(),character.getDescription(),character.getThumbnail());
+                        characters.setResult(simpleCharacter);
+                    }else {
+                        characters.setErrorResult("Error, Character can't be found "+response.getStatus());
+                    }
 
-        },error -> {
-                characters.setErrorResult("Error, Character can't be found due to this error:"+error.getMessage());
-            }
+                },error -> {
+                    characters.setErrorResult("Error, Character can't be found due to this error:"+error.getMessage());
+                }
         );
-       return characters;
+        return characters;
     }
 
 
@@ -102,18 +99,25 @@ public class Characters {
         DeferredResult<DataResponse> powers=new DeferredResult<>();
         fetchCharacterDetail(characterId).subscribe(response->{
 
-                if(response.getCode()==200  && response.getData().getResults()!=null && response.getData().getResults().size()>0){
+                    if(response.getCode()==200  && response.getData().getResults()!=null && response.getData().getResults().size()>0){
                         Character character=response.getData().getResults().get(0);
                         List<URL> wikiUrls=
-                                character.getUrls().stream().filter( wiki ->wiki.getType().equals("wiki")).collect(Collectors.toList());
+                                character.getUrls()
+                                        .stream()
+                                        .filter( wiki -> wiki.getType().equals("wiki"))
+                                        .collect(Collectors.toList());
 
                         if(wikiUrls!=null && wikiUrls.size()>0) {
                             final Document doc = Jsoup.connect(wikiUrls.get(0).getUrl()).get();
                             final org.jsoup.select.Elements content = doc.getElementsByClass("power-circle__label");
-                            List<String> retrievedPowers = content.stream().map(e -> e.text()).collect(Collectors.toList());
+
+                            List<String> retrievedPowers = content
+                                                            .stream().map(e -> e.text())
+                                                            .collect(Collectors.toList());
+
                             DataResponse  dataResponse= new DataResponse(retrievedPowers);
 
-                            if(languageCode ==null) {
+                            if(languageCode == null) {
                                 powers.setResult(dataResponse);
                             }else {
                                 List<String> targetLanguage=Arrays.asList(languages).stream().filter(lang ->lang.equals(languageCode)).collect(Collectors.toList());
@@ -135,11 +139,11 @@ public class Characters {
                                                             .replaceAll("\\[\\[","")
                                                             .replaceAll("]]","");
                                                     powers.setResult(new DataResponse(Arrays.asList(translatedTexts.split(","))));
-                                                    }
+                                                }
                                                 ,error ->powers.setErrorResult(error.getMessage()));
 
                             }
-                        }else {
+                        } else {
                             powers.setErrorResult("No wiki URL available for this character");
                         }
                     }
@@ -149,7 +153,7 @@ public class Characters {
                     powers.setErrorResult(error.getMessage());
                 }
         );
-    return powers;
+        return powers;
     }
 
     private Observable<MarvelResponseWrapper> fetchCharacterDetail(int characterId){
