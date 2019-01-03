@@ -11,14 +11,13 @@
     <groupId>com.mkayad</groupId>
     <artifactId>yapilycodechallenge</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>yapilycodechallenge</name>
+    <name>codechallenge</name>
     <description>Yapily Code Challenge</description>
 
     <properties>
         <java.version>1.8</java.version>
 
         <!-- dependencies -->
-
         <rxjava2.version>2.2.4</rxjava2.version>
         <swagger.version>2.9.2</swagger.version>
         <retrofit.version>2.5.0</retrofit.version>
