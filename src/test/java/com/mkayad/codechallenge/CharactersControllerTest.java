@@ -42,13 +42,9 @@ public class CharactersControllerTest {
     @Test
     public void testListOfCharacters() throws Exception {
         MvcResult result = mockMvc
-                .perform(get("/characters")
-
-                        .contentType(APPLICATION_XML))
+                .perform(get("/characters").contentType(APPLICATION_XML))
                 .andExpect(request().asyncStarted())
                 .andReturn();
-
-        //result.getAsyncResult();
 
         mockMvc
                 .perform(asyncDispatch(result))
@@ -60,12 +56,9 @@ public class CharactersControllerTest {
     @Test
     public void testSpecificCharacterId() throws Exception {
         MvcResult result = mockMvc
-                .perform(get("/characters/1010906")
-                .contentType(APPLICATION_JSON))
+                .perform(get("/characters/1010906").contentType(APPLICATION_JSON))
                 .andExpect(request().asyncStarted())
                 .andReturn();
-
-        //result.getAsyncResult();
 
         mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isOk())
@@ -77,12 +70,9 @@ public class CharactersControllerTest {
     @Test
     public void testCharacterPowers() throws Exception {
         MvcResult result = mockMvc
-                .perform(get("/characters/1010906/powers")
-                .contentType(APPLICATION_JSON))
+                .perform(get("/characters/1010906/powers").contentType(APPLICATION_JSON))
                 .andExpect(request().asyncStarted())
                 .andReturn();
-
-       // result.getAsyncResult();
 
         mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isOk())
@@ -92,12 +82,9 @@ public class CharactersControllerTest {
     @Test
     public void testCharacterPowersTanslatedToFrench() throws Exception {
         MvcResult result = mockMvc
-                .perform(get("/characters/1010906/powers?language=fr")
-                .contentType(APPLICATION_JSON))
+                .perform(get("/characters/1010906/powers?language=fr").contentType(APPLICATION_JSON))
                 .andExpect(request().asyncStarted())
                 .andReturn();
-
-       // result.getAsyncResult();
 
         mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isOk())
@@ -107,12 +94,9 @@ public class CharactersControllerTest {
     @Test
     public void testUnvalidCharacterId() throws Exception {
         MvcResult result = mockMvc
-                    .perform(get("/characters/-1111")
-                    .contentType(APPLICATION_JSON))
+                    .perform(get("/characters/-1111").contentType(APPLICATION_JSON))
                     .andExpect(request().asyncStarted())
                     .andReturn();
-
-        //result.getAsyncResult();
 
         mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isOk())
@@ -121,17 +105,12 @@ public class CharactersControllerTest {
     @Test
     public void testUnvalidLanguageTranslation() throws Exception {
         MvcResult result = mockMvc
-                    .perform(get("/characters/1010906/powers?language=un")
-                    .contentType(APPLICATION_JSON))
+                    .perform(get("/characters/1010906/powers?language=un").contentType(APPLICATION_JSON))
                     .andExpect(request().asyncStarted())
                     .andReturn();
-
-       // result.getAsyncResult();
 
         mockMvc.perform(asyncDispatch(result))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Unknown language")));
     }
-
-
 }

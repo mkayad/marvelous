@@ -29,33 +29,28 @@ public class Application {
     CacheConfiguration cacheConfiguration;
 
     public static void main(String[] args) {
-//        System.out.println("Main method \n "+System.getProperty("mv-pub-key")+"\n");
-//        System.out.println(System.getProperty("mv-priv-key")+"\n");
-//        System.out.println(System.getProperty("gg-api-key")+"\n");
-        if(args.length >=3){
 
-            marvelPublicKey =args[0].split("=")[1];
-            marvelPrivateKey =args[1].split("=")[1];
-            googleAPIKey =args[2].split("=")[1];
+        if(args.length >=3 ){
+            marvelPublicKey = args[0].split("=")[1];
+            marvelPrivateKey = args[1].split("=")[1];
+            googleAPIKey = args[2].split("=")[1];
 
-//            //this is used for unit testing
-            if(System.getProperty("mv-pub-key")==null)
-                System.setProperty("mv-pub-key",marvelPublicKey);
+            //this is required in the testing phase
+            if (System.getProperty("mv-pub-key") == null)
+                System.setProperty("mv-pub-key", marvelPublicKey);
 
-            if(System.getProperty("mv-priv-key")==null)
-                System.setProperty("mv-priv-key",marvelPrivateKey);
+            if (System.getProperty("mv-priv-key") == null)
+                System.setProperty("mv-priv-key", marvelPrivateKey);
 
-            if(System.getProperty("gg-api-key")==null)
-                System.setProperty("gg-api-key",googleAPIKey);
-//
-//            System.out.println("after Main method \n "+System.getProperty("mv-pub-key")+"\n");
-//            System.out.println(System.getProperty("mv-priv-key")+"\n");
-//            System.out.println(System.getProperty("gg-api-key")+"\n");
+            if (System.getProperty("gg-api-key") == null)
+                System.setProperty("gg-api-key", googleAPIKey);
             SpringApplication.run(Application.class, args);
-        }else {
+        }
+        else {
+
             System.out.println("The application requires the Marvel and Google Translation API keys passed in arguments \n as  shown below :\n" +
                     "mvn spring-boot:run -Dspring-boot.run.arguments=--mv-pub-key=XXXXX,--mv-priv-key=YYYYY,--gg-api-key=ZZZZZ\n" +
-                    "where XXXXX=marvel public key, YYYYY=Marvel private key and ZZZZZ=Google Translate API key");
+                    "where XXXXX=marvel public key,\n YYYYY=Marvel private key \n and ZZZZZ=Google Translate API key");
             System.exit(0);
         }
     }
@@ -64,7 +59,7 @@ public class Application {
     @Bean
     CommandLineRunner initData(){
         return args -> {
-            System.out.println("Initialization step => load 100 character ids into memory");
+            System.out.println("Cache initialization with 100 character ids");
             if(marvelPublicKey==null)
                 marvelPublicKey=System.getProperty("mv-pub-key");
 
@@ -73,15 +68,16 @@ public class Application {
 
             if(googleAPIKey==null)
                 googleAPIKey=System.getProperty("gg-api-key");
-            System.out.println(marvelPublicKey+" "+marvelPrivateKey+" "+googleAPIKey);
-
+            
             int ts= LocalDateTime.now().getNano();
             Cache cache=cacheConfiguration.ehCacheCacheManager().getCacheManager().getCache("charactersCache");
             Observable<MarvelResponseWrapper> characters= ServiceGenerator.createService(MarvelService.class).getCharacters(ts, marvelPublicKey,getHash(ts),100);
             characters
                     .subscribe(response ->{
-                        if(response.getCode()==200)
-                            response.getData().getResults().stream().forEach(d -> cache.put(new Element(d.getId(),d.getId())));
+                        if(response.getCode()==200) {
+                            response.getData().getResults().stream().forEach(d -> cache.put(new Element(d.getId(), d.getId())));
+                            System.out.println("The Cache has been initialized.");
+                        }
                         else {
                             System.out.println("Error occurred while retrieving the data");
                         }
