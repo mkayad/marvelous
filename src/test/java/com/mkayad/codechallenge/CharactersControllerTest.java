@@ -28,16 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @ContextConfiguration(classes = { CacheConfiguration.class,Application.class })
 public class CharactersControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
-
-    @InjectMocks
-    private Characters charactersController;
-
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void testListOfCharacters() throws Exception {
