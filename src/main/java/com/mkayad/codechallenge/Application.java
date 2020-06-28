@@ -27,30 +27,7 @@ public class Application {
     CacheConfiguration cacheConfiguration;
 
     public static void main(String[] args) {
-
-        if(args.length >=3 ){
-            marvelPublicKey = args[0].split("=")[1];
-            marvelPrivateKey = args[1].split("=")[1];
-            googleAPIKey = args[2].split("=")[1];
-
-            //this is required in the testing phase
-            if (System.getProperty("mv-pub-key") == null)
-                System.setProperty("mv-pub-key", marvelPublicKey);
-
-            if (System.getProperty("mv-priv-key") == null)
-                System.setProperty("mv-priv-key", marvelPrivateKey);
-
-            if (System.getProperty("gg-api-key") == null)
-                System.setProperty("gg-api-key", googleAPIKey);
             SpringApplication.run(Application.class, args);
-        }
-        else {
-
-            System.out.println("The application requires the Marvel and Google Translation API keys passed in arguments \n as  shown below :\n" +
-                    "mvn spring-boot:run -Dspring-boot.run.arguments=--mv-pub-key=XXXXX,--mv-priv-key=YYYYY,--gg-api-key=ZZZZZ\n" +
-                    "where XXXXX=marvel public key,\n YYYYY=Marvel private key \n and ZZZZZ=Google Translate API key");
-            System.exit(0);
-        }
     }
 
 
