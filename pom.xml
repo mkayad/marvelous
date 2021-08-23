@@ -23,7 +23,7 @@
         <retrofit.version>2.5.0</retrofit.version>
         <converter-gson.version>2.5.0</converter-gson.version>
         <ehcache.version>2.10.6</ehcache.version>
-        <jsoup.version>1.11.3</jsoup.version>
+        <jsoup.version>1.14.2</jsoup.version>
         <commons.codec.version>1.11</commons.codec.version>
     </properties>
 
