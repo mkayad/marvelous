@@ -19,7 +19,7 @@
 
         <!-- dependencies -->
         <rxjava2.version>2.2.4</rxjava2.version>
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>2.10.0</swagger.version>
         <retrofit.version>2.5.0</retrofit.version>
         <converter-gson.version>2.5.0</converter-gson.version>
         <ehcache.version>2.10.6</ehcache.version>
